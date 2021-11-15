@@ -1,33 +1,47 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
 import Input from './Input';
-import { Avatar, Button, CssBaseline, Paper, Grid, Typography, Box } from '@mui/material'
+import { Avatar, TextField, Button, CssBaseline, Paper, Grid, Typography, Box } from '@mui/material';
+import { signin, signup } from '../../actions/auth';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
-const SignInSide = () => {
+const theme = createTheme();
+
+const Auth = () => {
 
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
-  
-  const theme = createTheme();
+  const [error, setError] = useState("");
 
-  const [showPassword, setShowPassword] = useState(false);
-  const handleShowPassword = () => setShowPassword(!showPassword);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const switchMode = () => {
+    setError("");
     setForm(initialState);
     setIsSignup((prevIsSignup) => !prevIsSignup);
-    setShowPassword(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+    if (isSignup) {
+      dispatch(signup(form, navigate, setError));
+    } else {
+      dispatch(signin(form, navigate, setError));
+    }
   };
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) =>{
+    if(e.target.name === 'confirmPassword') {
+      
+    }
+    setForm({ ...form, [e.target.name]: e.target.value });
+  } 
 
   return (
     <ThemeProvider theme={theme}>
@@ -63,17 +77,26 @@ const SignInSide = () => {
             <Typography sx={{mb: 2}} component="h1" variant="h5">{ isSignup ? 'Sign up' : 'Sign in' }</Typography>
             <form onSubmit={handleSubmit}>
               <Grid container spacing={2}>
-                { isSignup && (
-                <>
-                  <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />
-                  <Input name="lastName" label="Last Name" handleChange={handleChange} half />
-                </>
-                )}
+                { isSignup && (<Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />) }
+                { isSignup && (<Input name="lastName" label="Last Name" handleChange={handleChange} half />) }    
                 <Input name="email" label="Email Address" handleChange={handleChange} type="email" />
-                <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
-                { isSignup && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" /> }
+                <Grid item xs={12}>
+                  <TextField 
+                      sx={{ m: 1 }}
+                      name="password"
+                      label="Password"
+                      onChange={handleChange}
+                      fullWidth
+                      required
+                      autoFocus
+                      variant="outlined"
+                      type='password'
+                  />
+                </Grid>   
+                { isSignup && <Input name="confirmPassword" label="Confirm Password" handleChange={handleChange} type="password" /> }
               </Grid>
-              <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mt: 3, mb: 2 }}>
+              <Typography sx={{ml:1 ,color: 'error.main', fontStyle: 'italic'}}>{error}</Typography>
+              <Button type="submit" fullWidth variant="contained" color="primary" sx={{ml:1, mt: 2, mb: 2 }}>
                 { isSignup ? 'Sign Up' : 'Sign In' }
               </Button>
               <Grid container justify="flex-end">
@@ -91,4 +114,4 @@ const SignInSide = () => {
   );
 }
 
-export default SignInSide;
+export default Auth;
