@@ -9,6 +9,7 @@ const app = express();
 
 //import routes
 const userRoutes = require('./routes/user.js');
+const blogRoutes = require('./routes/blogPosts.js');
 
 //Middleware
 app.use(express.json({limit: '30mb', extended: true,}));
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/user', userRoutes);
+app.use('/blogs', blogRoutes);
 
 const PORT = 5000;
 

@@ -1,13 +1,13 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const UserModal = require('../models/user.js');
+const User = require('../models/user.js');
 
 const signin = async (req, res) => {
     //Signing in logic
     const { email, password } = req.body;
     try {
-        const oldUser = await UserModal.findOne({ email });
+        const oldUser = await User.findOne({ email });
         if(!oldUser) return res.status(404).json({ message: "User doesn't exist" });
         const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
         if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid credentials" });
@@ -23,17 +23,17 @@ const signup = async (req, res) => {
     const { email, password, firstName, lastName } = req.body;
     //console.log(req.body);
     try {
-        const oldUser = await UserModal.findOne({ email });
+        const oldUser = await User.findOne({ email });
         if(oldUser) return res.status(400).json({message: 'User already exists'});
         const hashedPassword = await bcrypt.hash(password, 12);
         
-        const newUser = new UserModal({
+        const newUser = new User({
             email: email,
             password: hashedPassword,
             name: `${firstName} ${lastName}`
         });
         
-        const result = await UserModal.create(newUser);
+        const result = await User.create(newUser);
         //console.log(result);
         const token = jwt.sign({ email: result.email, id: result._id }, process.env.SECRET, { expiresIn: "1h" });
         res.status(201).json({ result, token });
