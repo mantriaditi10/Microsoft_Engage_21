@@ -3,6 +3,15 @@ const mongoose = require('mongoose');
 
 const BlogPost = require('../models/blogPost.js');
 
+const fetchPosts = async (req, res) => {
+    try {
+        const blogs = await BlogPost.find();
+        res.status(200).json(blogs);
+    } catch (error) {
+        res.status(400).json({ message: error });
+    }
+}
+
 const createPost = async (req, res) => {
     const post = req.body;
 
@@ -22,3 +31,4 @@ const createPost = async (req, res) => {
 }
 
 module.exports.createPost = createPost;
+module.exports.fetchPosts = fetchPosts;
