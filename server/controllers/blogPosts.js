@@ -14,7 +14,7 @@ const fetchPosts = async (req, res) => {
 
 const createPost = async (req, res) => {
     const post = req.body;
-
+    //console.log(req.body);
     const newBlogPost = new BlogPost({
         ...post,
         creator: req.userId,
@@ -30,5 +30,27 @@ const createPost = async (req, res) => {
     }
 }
 
+const bookmarkPost = async (req, res) => {
+    const { id } = req.params;
+    const body = req.body;  
+
+    // console.log(id); 
+    // console.log(body);
+
+    if(!mongoose.Types.ObjectId.isValid(id)) 
+        return res.status(404).send(`No post with id: ${id}`);
+
+    const post = await BlogPost.findById(id);
+    
+    const index = post.bookmarks.findIndex((id) => id === body.userId);
+
+    if(index === -1) {
+        post.bookmarks.push(body.userId);
+    }
+    const updatedPost = await BlogPost.findByIdAndUpdate(id, post, { new: true });
+    res.status(200).json(updatedPost);
+}
+
 module.exports.createPost = createPost;
 module.exports.fetchPosts = fetchPosts;
+module.exports.bookmarkPost = bookmarkPost;

@@ -16,6 +16,10 @@ const blogPostSchema = mongoose.Schema({
         type: Date,
         default: new Date(),
     },
+    bookmarks: {
+        type: [String],
+        default: []
+    }
 });
 
 module.exports = mongoose.model('BlogPosts', blogPostSchema);

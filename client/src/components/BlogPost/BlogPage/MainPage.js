@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../NavBar/Navbar';
 import Posts from './Posts';
 import FilterSideBar from './FilterSideBar';
 import { Button, Typography, Box, Container, Stack, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchBlogPosts } from '../../../actions/blogPosts'
 
-const MainPage = () => {
-    console.log(JSON.parse(localStorage.getItem('profile')));
+const MainPage = (props) => {
+    const dispatch = useDispatch();
+    const [category, setCategory] = useState('Show All');
+    const page = props.page;
+    useEffect(() => {
+        dispatch(fetchBlogPosts());
+    }, [dispatch, category]);
+
     return (
         <React.Fragment>
             <Navbar />
@@ -29,10 +37,10 @@ const MainPage = () => {
                         color="text.primary"
                         gutterBottom
                     >
-                        BLOGSPOT
+                        { page === 'blogs'? 'BLOGSPOT' : ' BOOKMARKS' }
                     </Typography>
                     <Typography fontFamily="fantasy" variant="h5" align="center" color="text.secondary" paragraph>
-                        A place to explore ideas, speak your mind and network with your peers.
+                        {page === 'blogs' ? 'A place to explore ideas, speak your mind and network with your peers.': 'Find your bookmarked posts here.'}
                     </Typography>
                     <Stack
                         sx={{ pt: 4 }}
@@ -41,14 +49,18 @@ const MainPage = () => {
                         justifyContent="center"
                     >
                         <Button component={Link} to="/blogs/createPost" variant="contained">Create your own Post</Button>
-                        <Button variant="outlined">Bookmarked Posts</Button>
+                        {page === 'blogs'? <Button component={Link} to="/blogs/bookmarks" variant="outlined">Bookmarked Posts</Button> 
+                        : <Button component={Link} to="/blogs" variant="outlined">All Posts</Button>}
+
                     </Stack>
                 </Container>
             </Box>
-            <Grid container spacing={2} sx={{mt: 3}}>
-                <Posts />
-                <FilterSideBar />
-            </Grid>
+            <Container maxWidth="lg">
+                <Grid container spacing={2} sx={{mt: 3}}>
+                    <Posts page={page} category={category}/>
+                    <FilterSideBar category={category} setCategory={setCategory}/>
+                </Grid>
+            </Container>
         </React.Fragment>
     )
 }

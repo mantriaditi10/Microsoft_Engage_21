@@ -1,10 +1,11 @@
 import React from 'react'
+import Navbar from '../../NavBar/Navbar'
 
 const SingleBlogPost = () => {
     return (
-        <div>
-            <h2>Single Blog Details on this Page</h2>
-        </div>
+        <React.Fragment>
+            <Navbar />
+        </React.Fragment>
     )
 }
 

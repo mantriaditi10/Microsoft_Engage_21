@@ -12,3 +12,5 @@ API.interceptors.request.use((req) => {
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
 export const createBlogPost = (newBlogPost) => API.post('/blogs', newBlogPost);
+export const fetchBlogPosts = () => API.get('/blogs');
+export const bookmarkPost = (id, user) => API.patch(`/blogs/${id}/bookmark`, user);

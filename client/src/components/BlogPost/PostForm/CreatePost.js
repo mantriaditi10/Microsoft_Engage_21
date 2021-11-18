@@ -9,7 +9,8 @@ import Navbar from '../../NavBar/Navbar';
 const initialState = { title: '', category: '', message: '', tags: [], selectedFile: '' }
 
 const CreatePost = () => {
-
+    const user = JSON.parse(localStorage.getItem('profile'));
+    console.log(user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [postData, setPostData] = useState(initialState);
@@ -37,6 +38,7 @@ const CreatePost = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        
         const data = new FormData()
         data.append("file",image)
         data.append("upload_preset","engage-app")
@@ -49,7 +51,7 @@ const CreatePost = () => {
         .then(data => {
             console.log(data.url);
             const finalPost = {
-                ...postData, selectedFile: data.url
+                ...postData, selectedFile: data.url, name: user.result.name
             }
             console.log(finalPost);
             dispatch(createBlogPost(finalPost, navigate));
@@ -60,17 +62,18 @@ const CreatePost = () => {
     return (
         <React.Fragment>
             <Navbar />
-            <Box
-                sx={{
-                    bgcolor: 'background.paper',
-                    boxShadow: 1,
-                    borderRadius: 2,
-                    m: 1,
-                    pt: 2,
-                    pb: 2,
-                }}
-            >
-                <Container maxWidth="lg">
+            <Container maxWidth="md">
+                <Box
+                    sx={{
+                        bgcolor: 'background.paper',
+                        boxShadow: 2,
+                        borderRadius: 2,
+                        m: 1,
+                        mt: 2,
+                        pt: 2,
+                        pb: 2,
+                    }}
+                >
                     <Typography
                         component="h1"
                         fontFamily="cursive"
@@ -84,8 +87,9 @@ const CreatePost = () => {
                     <Typography fontFamily="fantasy" variant="h5" align="center" color="text.secondary" paragraph>
                         Tell your story to the world..!
                     </Typography>
-                </Container>
-            </Box>
+                
+                </Box>
+            </Container>
             <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
                 <form onSubmit={handleSubmit}>
                     <Paper 
@@ -117,7 +121,7 @@ const CreatePost = () => {
                                         <MenuItem value="College Events">College Events</MenuItem>
                                         <MenuItem value="Blockchain">Blockchain</MenuItem>
                                         <MenuItem value="Mental Health">Mental Health</MenuItem>
-                                        <MenuItem value="Android Developement">Android Developement</MenuItem>
+                                        <MenuItem value="Android Development">Android Development</MenuItem>
                                         <MenuItem value="Books">Books</MenuItem>
                                         <MenuItem value="Philosophy">Philosophy</MenuItem>
                                         <MenuItem value="Data Science">Data Science</MenuItem>

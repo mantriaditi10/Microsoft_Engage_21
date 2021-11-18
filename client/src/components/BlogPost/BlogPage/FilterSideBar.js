@@ -8,7 +8,7 @@ const sidebar = {
       'Discover more of what matters to you!',
     tags: [
       { title: 'Machine Learning',  },
-      { title: 'Crytography',  },
+      { title: 'Cryptography',  },
       { title: 'Artificial Intelligence',  },
       { title: 'Web Development', },
       { title: 'College Events',  },
@@ -17,19 +17,19 @@ const sidebar = {
       { title: 'Android Development',  },
       { title: 'Books',  },
       { title: 'Philosophy',  },
-      { title: 'Data Sceincemagicmaker@gmail.com',  },
+      { title: 'Data Sceince',  },
       { title: 'Show All',  },
     ],
 };
 
-const FilterSideBar = () => {
-    
+const FilterSideBar = (props) => {
+    const setCategory = props.setCategory;
     return (
         <Grid item xs={12} md={4}>
             <Box
                 sx={{
                     bgcolor: 'background.paper',
-                    boxShadow: 1,
+                    boxShadow: 4,
                     borderRadius: 1,
                     m: 2,
                     mt: 0,
@@ -48,7 +48,13 @@ const FilterSideBar = () => {
             </Typography>
             <Typography align="center" sx={{ m: 1 }}>
                 {sidebar.tags.map((category) => (
-                    <Button key={uuidv4()} size="small" variant="outlined" color="primary" >
+                    <Button 
+                        key={uuidv4()} 
+                        size="small" 
+                        onClick={()=>setCategory(category.title)} 
+                        color="primary" 
+                        variant={props.category === category.title? "contained": "outlined"} 
+                    >
                         {category.title}
                     </Button>
                 ))}

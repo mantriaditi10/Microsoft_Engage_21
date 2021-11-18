@@ -1,39 +1,28 @@
-import React from 'react'
-import { Grid, Box, Typography } from '@mui/material'
+import React from 'react';
+import { Grid, CircularProgress } from '@mui/material';
+import Post from './Post';
+import { useSelector } from 'react-redux';
 
-
-const posts = [
-    {
-        title: '',
-        message: '',
-        category: '',
-        name: '',
-        tags: [''],
-        selectedFile: '',
-        likes: [1,1,1],
-        createdAt: ''
-    },
-]
-
-const Posts = () => {
+const Posts = (props) => {
+    const category = props.category;
+    const t = useSelector((state) => state.blogPosts);
+    const user = JSON.parse(localStorage.getItem('profile'));
+    //console.log(t[0]);
+    const posts = t[0];
+    if(posts) {
+        var filteredPosts = posts.filter((post)=>post.category===category||category==="Show All");
+    }
+    if(filteredPosts) var finalPosts = filteredPosts.reverse();
+    if(props.page === 'bookmarks') {
+        finalPosts = filteredPosts.filter((post)=> post.bookmarks.includes(user.result._id));
+    }
     
     return (
-        <Grid item xs={12} md={8}>
-            <Box
-                sx={{
-                    bgcolor: 'background.paper',
-                    boxShadow: 1,
-                    borderRadius: 1,
-                    m:2,
-                    mt: 0,
-                    pt: 2,
-                    pb: 2,
-                }}
-            >
-                <Typography>List of Posts</Typography>
-            </Box>
-        </Grid>
-    )
+        !posts ? (<Grid item xs={12} md={8}><CircularProgress />LOADING POSTS.. </Grid>) : 
+        (<Grid item xs={12} md={8}>
+            {finalPosts.map(post => <Post key={post._id} post={post} user={user} page={props.page}/>)}
+        </Grid>)
+    );
 }
 
 export default Posts

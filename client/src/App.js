@@ -10,9 +10,10 @@ const App = () => {
         <BrowserRouter> 
             <Routes>
                 <Route path='/' element={<Auth />} />
-                <Route path='/blogs' element={<MainPage />} />
+                <Route path='/blogs' element={<MainPage page='blogs'/>} />
                 <Route path='/blogs/createPost' element={<CreatePost />} />
                 <Route path='/blogs/:id' element={<SingleBlogPost />}/>
+                <Route path='/blogs/bookmarks' element={<MainPage page='bookmarks'/>} />
             </Routes>
         </BrowserRouter>
     );

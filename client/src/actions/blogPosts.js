@@ -1,11 +1,9 @@
-import { CREATE_BLOG } from "../constants/actionTypes";
+import { CREATE_BLOG, FETCH_ALL_BLOGS, BOOKMARK } from "../constants/actionTypes";
 import * as api from '../api/index';
 
 export const createBlogPost = (post, navigate) => async (dispatch) => {
     try {
-        console.log('Reaching here');
         const { data } = await api.createBlogPost(post);
-        console.log(data);
         dispatch({type: CREATE_BLOG, payload: data});
         navigate(`/blogs/${data._id}`);
     } catch (error) {
@@ -13,3 +11,24 @@ export const createBlogPost = (post, navigate) => async (dispatch) => {
         console.log(error);
     }
 };
+
+export const fetchBlogPosts = () => async (dispatch) => {
+    try {
+        //console.log("hey reaching here");
+        const { data } = await api.fetchBlogPosts();
+        //console.log(data);
+        dispatch({type: FETCH_ALL_BLOGS, payload: data});
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const bookmarkBlogPost = (id, user) => async (dispatch) => {
+    try {
+        //console.log(user);
+        const { data } = await api.bookmarkPost(id, user);
+        dispatch({ type: BOOKMARK, payload: data });
+    } catch (error) {
+        console.log(error);
+    }
+}

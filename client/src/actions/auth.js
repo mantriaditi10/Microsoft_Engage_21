@@ -4,6 +4,7 @@ import * as api from '../api/index.js';
 export const signin = (formData, router, setError) => async (dispatch) => {
   try {
     const { data } = await api.signIn(formData);
+    console.log(data);
     dispatch({ type: AUTH, data });
     router('/blogs');
   } catch (error) {
@@ -16,6 +17,7 @@ export const signin = (formData, router, setError) => async (dispatch) => {
 export const signup = (formData, router, setError) => async (dispatch) => {
   try {
     const { data } = await api.signUp(formData);
+    console.log(data);
     dispatch({ type: AUTH, data });
     router('/blogs');
   } catch (error) {
