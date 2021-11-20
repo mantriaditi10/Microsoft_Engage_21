@@ -23,7 +23,8 @@ const sidebar = {
 };
 
 const FilterSideBar = (props) => {
-  const setCategory = props.setCategory;
+  const setFilters = props.setFilters;
+  const filters = props.filters;
   return (
     <Grid item xs={12} md={4}>
       <Box
@@ -51,13 +52,52 @@ const FilterSideBar = (props) => {
             <Button
               key={uuidv4()}
               size="small"
-              onClick={() => setCategory(category.title)}
+              onClick={() => setFilters({...filters, category: category.title})}
               color="primary"
-              variant={props.category === category.title ? "contained" : "outlined"}
+              variant={filters.category === category.title ? 'contained' : 'outlined'}
             >
               {category.title}
             </Button>
           ))}
+        </Typography>
+        <Typography align="center" variant="h6" gutterBottom sx={{ mt: 1 }}>
+          OTHER FILTERS
+        </Typography>
+        <Typography align="center" sx={{ m: 1 }}>
+          <Button
+            size="small"
+            color="primary"
+            variant={filters.other === 'Most Liked' ? 'contained' : 'outlined'}
+            onClick={() => setFilters({...filters, other: 'Most Liked'})}
+          >
+            MOST LIKED
+          </Button>
+          <Button
+            size="small"
+            color="primary"
+            variant={filters.other === 'Most Bookmarked' ? 'contained' : 'outlined'}
+            onClick={() => setFilters({...filters, other: 'Most Bookmarked'})}
+          >
+            MOST BOOKMARKED
+          </Button>
+          <Typography align="center" sx={{ m: 1 }}>
+            <Button
+              size="small"
+              color="primary"
+              variant={filters.other === 'Newest First' ? 'contained' : 'outlined'}
+              onClick={() => setFilters({...filters, other: 'Newest First'})}
+            >
+              NEWEST FIRST
+            </Button>
+            <Button
+              size="small"
+              color="primary"
+              variant={filters.other === 'Oldest First' ? 'contained' : 'outlined'}
+              onClick={() => setFilters({...filters, other: 'Oldest First'})}
+            >
+              OLDEST FIRST
+            </Button>
+          </Typography>
         </Typography>
       </Box>
     </Grid>

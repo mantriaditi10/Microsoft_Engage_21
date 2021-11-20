@@ -44,13 +44,15 @@ const bookmarkPost = async (req, res) => {
 
 const likePost = async (req, res) => {
   const { id } = req.params;
+  const body = req.body;
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send(`No post with id: ${id}`);
   const post = await BlogPost.findById(id);
-  const currLikes = post.likes;
-  post.likes = currLikes + 1;
+  const index = post.likes.findIndex((id) => id === body.userId);
+  if (index === -1) {
+    post.likes.push(body.userId);
+  }
   const updatedPost = await BlogPost.findByIdAndUpdate(id, post, { new: true });
-  console.log(updatedPost);
   res.status(200).json(updatedPost);
 }
 

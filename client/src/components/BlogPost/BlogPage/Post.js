@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Grid, Card, Box, CardContent, Typography, Button, CardMedia } from '@mui/material'
 import { useDispatch } from "react-redux";
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
@@ -12,15 +12,13 @@ const Post = (props) => {
   const post = props.post;
   const dispatch = useDispatch();
   const user = props.user;
-  const [isBookmarked, setIsBookmarked] = useState(false);
   
   const handleBookmark = () => {
-    setIsBookmarked(true);
     dispatch(bookmarkBlogPost(post._id, { userId: user.result._id }));
   }
 
   const handleLike = () => {
-    dispatch(likePost(post._id));
+    dispatch(likePost(post._id, { userId: user.result._id }));
   }
 
   return (
@@ -41,13 +39,21 @@ const Post = (props) => {
           </Typography>
 
           <Box sx={{ display: 'flex', alignItems: 'center', pb: 1, mt: 1 }}>
-            <Button endIcon={<ReadMoreIcon />} variant="outlined" sx={{ mr: 1 }} color="primary">Read</Button>
+            <Button endIcon={<ReadMoreIcon />} variant="outlined"  color="primary">Read</Button>
             {
-              isBookmarked || props.page === 'bookmarks' ?
-                <Button endIcon={<BookmarkAddedIcon />} variant="contained" sx={{ mr: 1 }} color="primary">Bookmarked</Button>
-                : <Button endIcon={<BookmarkAddIcon />} onClick={handleBookmark} variant="outlined" sx={{ mr: 1 }} color="primary">Bookmark</Button>
+              post.bookmarks.includes(user.result._id) || props.page === 'bookmarks' ?
+                <Button startIcon={<BookmarkAddedIcon />} variant="text" disabled color="primary">{post.bookmarks.length}</Button>
+                : <Button startIcon={<BookmarkAddIcon />} onClick={handleBookmark} variant="text" color="primary">{post.bookmarks.length}</Button>
             }
-            <Button endIcon={<ThumbUpIcon />} variant="outlined" onClick={handleLike} sx={{ mr: 1 }} color="primary">Like</Button>
+            <Button 
+              startIcon={<ThumbUpIcon />} 
+              disabled={post.likes.includes(user.result._id)} 
+              variant="text" 
+              onClick={handleLike} 
+              color="primary"
+            >
+              {post.likes.length}
+            </Button>
           </Box>
         </CardContent>
         <CardMedia

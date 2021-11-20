@@ -7,19 +7,24 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchBlogPosts } from '../../../actions/blogPosts'
 
+const initialFilters = {
+  category: 'Show All',
+  other: 'Newest First'
+}
+
 const MainPage = (props) => {
   const dispatch = useDispatch();
-  const [category, setCategory] = useState('Show All');
+  const [filters, setFilters] = useState(initialFilters);
   const page = props.page;
-  
+
   useEffect(() => {
     console.log('Fetching Posts');
     dispatch(fetchBlogPosts());
   }, [dispatch]);
 
   useEffect(() => {
-    console.log(`Category selected: ${category}`);
-  }, [category])
+    console.log(`Filters selected: ${filters}`);
+  }, [filters])
 
   return (
     <React.Fragment>
@@ -65,8 +70,8 @@ const MainPage = (props) => {
       </Box>
       <Container maxWidth="lg">
         <Grid container spacing={2} sx={{ mt: 3 }}>
-          <Posts page={page} category={category} />
-          <FilterSideBar category={category} setCategory={setCategory} />
+          <Posts page={page} filters={filters} />
+          <FilterSideBar filters={filters} setFilters={setFilters} />
         </Grid>
       </Container>
     </React.Fragment>

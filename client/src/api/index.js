@@ -14,4 +14,4 @@ export const signUp = (formData) => API.post('/user/signup', formData);
 export const createBlogPost = (newBlogPost) => API.post('/blogs', newBlogPost);
 export const fetchBlogPosts = () => API.get('/blogs');
 export const bookmarkPost = (id, user) => API.patch(`/blogs/${id}/bookmark`, user);
-export const likePost = (id) => API.patch(`/blogs/${id}/like`);
+export const likePost = (id, user) => API.patch(`/blogs/${id}/like`, user);

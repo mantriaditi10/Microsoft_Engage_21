@@ -9,8 +9,8 @@ const blogPostSchema = mongoose.Schema({
   tags: [String],
   selectedFile: String,
   likes: {
-    type: Number,
-    default: 0,
+    type: [String],
+    default: [],
   },
   createdAt: {
     type: Date,
@@ -19,7 +19,7 @@ const blogPostSchema = mongoose.Schema({
   bookmarks: {
     type: [String],
     default: []
-  }
+  },
 });
 
 module.exports = mongoose.model('BlogPosts', blogPostSchema);
