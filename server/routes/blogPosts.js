@@ -1,12 +1,14 @@
 const express = require('express');
 
-const { createPost, fetchPosts, bookmarkPost } = require('../controllers/blogPosts');
+const { createPost, fetchPosts, bookmarkPost, likePost } = require('../controllers/blogPosts');
 
 const router = express.Router();
+const auth = require('../middleware/authentication')
 
-router.get('/', fetchPosts);
-router.post('/', createPost);
+router.get('/', auth, fetchPosts);
+router.post('/', auth, createPost);
 
-router.patch('/:id/bookmark', bookmarkPost);
+router.patch('/:id/bookmark', auth, bookmarkPost);
+router.patch('/:id/like', auth, likePost);
 
 module.exports = router;

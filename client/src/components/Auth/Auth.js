@@ -36,12 +36,12 @@ const Auth = () => {
     }
   };
 
-  const handleChange = (e) =>{
-    if(e.target.name === 'confirmPassword') {
-      
+  const handleChange = (e) => {
+    if (e.target.name === 'confirmPassword') {
+
     }
     setForm({ ...form, [e.target.name]: e.target.value });
-  } 
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -71,38 +71,40 @@ const Auth = () => {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography sx={{mb: 2}} component="h1" variant="h5">{ isSignup ? 'Sign up' : 'Sign in' }</Typography>
+            <Typography sx={{ mb: 2 }} component="h1" variant="h5">{isSignup ? 'Sign up' : 'Sign in'}</Typography>
             <form onSubmit={handleSubmit}>
               <Grid container spacing={2}>
-                { isSignup && (<Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />) }
-                { isSignup && (<Input name="lastName" label="Last Name" handleChange={handleChange} half />) }    
+                {isSignup && (<Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />)}
+                {isSignup && (<Input name="lastName" label="Last Name" handleChange={handleChange} half />)}
                 <Input name="email" label="Email Address" handleChange={handleChange} type="email" />
                 <Grid item xs={12}>
-                  <TextField 
-                      sx={{ m: 1 }}
-                      name="password"
-                      label="Password"
-                      onChange={handleChange}
-                      fullWidth
-                      required
-                      autoFocus
-                      variant="outlined"
-                      type='password'
+                  <TextField
+                    sx={{ m: 1 }}
+                    name="password"
+                    label="Password"
+                    onChange={handleChange}
+                    fullWidth
+                    required
+                    autoFocus
+                    variant="outlined"
+                    type='password'
                   />
-                </Grid>   
-                { isSignup && <Input name="confirmPassword" label="Confirm Password" handleChange={handleChange} type="password" /> }
+                </Grid>
+                {isSignup && 
+                  <Input name="confirmPassword" label="Confirm Password" handleChange={handleChange} type="password" />
+                }
               </Grid>
-              <Typography sx={{ml:1 ,color: 'error.main', fontStyle: 'italic'}}>{error}</Typography>
-              <Button type="submit" fullWidth variant="contained" color="primary" sx={{ml:1, mt: 2, mb: 2 }}>
-                { isSignup ? 'Sign Up' : 'Sign In' }
+              <Typography sx={{ ml: 1, color: 'error.main', fontStyle: 'italic' }}>{error}</Typography>
+              <Button type="submit" fullWidth variant="contained" color="primary" sx={{ ml: 1, mt: 2, mb: 2 }}>
+                {isSignup ? 'Sign Up' : 'Sign In'}
               </Button>
               <Grid container justify="flex-end">
                 <Grid item>
                   <Button onClick={switchMode}>
-                    { isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign Up" }
+                    {isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign Up"}
                   </Button>
                 </Grid>
               </Grid>
