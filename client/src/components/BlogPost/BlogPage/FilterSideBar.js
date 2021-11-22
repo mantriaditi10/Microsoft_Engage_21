@@ -1,6 +1,8 @@
-import React from 'react'
-import { Grid, Box, Typography, Paper, Button } from '@mui/material'
-import { v4 as uuidv4 } from "uuid";
+import React, { useState } from 'react'
+import { Grid, Box, Typography, Paper, Button, IconButton, OutlinedInput, InputAdornment } from '@mui/material'
+import { v4 as uuidv4 } from 'uuid';
+import SearchIcon from '@mui/icons-material/Search';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const sidebar = {
   title: 'FILTER THE CONTENT',
@@ -25,8 +27,39 @@ const sidebar = {
 const FilterSideBar = (props) => {
   const setFilters = props.setFilters;
   const filters = props.filters;
+  const setHashtag = props.setHashtag;
+  const [searchTag, setSearchTag] = useState('');
+
   return (
     <Grid item xs={12} md={4}>
+      <Box
+        sx={{
+          bgcolor: 'background.paper',
+          boxShadow: 4,
+          borderRadius: 1,
+          m: 2,
+          mt: 3,
+          pt: 2,
+          pb: 2,
+        }}
+      >
+        <Paper elevation={0}>
+          <Typography fontFamily="cursive" align="center" variant="h5" gutterBottom sx={{ p: 2, bgcolor: "ActiveCaption" }}>
+            SEARCH BY HASHTAG
+          </Typography>
+        </Paper>
+        <Paper elevation={0} sx={{ display:'flex', p: 1 }}>
+          <OutlinedInput
+            sx={{ ml: 2 }}
+            fullWidth
+            size='small'
+            startAdornment={<InputAdornment position="start">#</InputAdornment>}
+            onChange={(e) => setSearchTag(e.target.value)}
+          />
+          <IconButton color="primary" onClick={() => setHashtag(searchTag)}><SearchIcon /></IconButton>
+          <IconButton color="primary" onClick={() => setHashtag('')}><ClearIcon /></IconButton>
+        </Paper>
+      </Box>
       <Box
         sx={{
           bgcolor: 'background.paper',

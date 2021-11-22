@@ -4,3 +4,5 @@ export const LOGOUT = 'LOGOUT';
 export const FETCH_ALL_BLOGS = 'FETCH_ALL_BLOGS';
 export const BOOKMARK = 'BOOKMARK';
 export const LIKE = 'LIKE';
+export const FETCH_BLOG = 'FETCH_BLOG';
+export const COMMENT = 'COMMENT';

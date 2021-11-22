@@ -4,15 +4,20 @@ import Post from './Post';
 import { useSelector } from 'react-redux';
 
 const Posts = (props) => {
-  
   const filters = props.filters;
-  const t = useSelector((state) => state.blogPosts);
+  const posts = useSelector((state) => state.blogPosts.blogPosts[0]);
   const user = JSON.parse(localStorage.getItem('profile'));
-  const posts = t[0];
-
-  if (posts) {
-    var filteredPosts = posts.filter((post) => post.category === filters.category || filters.category === "Show All");
+  const hashtag = props.hashtag;
+  
+  var filteredPosts;
+  if (posts && hashtag !== '') {
+    filteredPosts = posts.filter((post) => post.tags.includes(hashtag));
+    filteredPosts = filteredPosts.filter((post) => post.category === filters.category || filters.category === "Show All");
   }
+  else if (posts) {
+    filteredPosts = posts.filter((post) => post.category === filters.category || filters.category === "Show All");
+  }
+
   if (filteredPosts && filters.other === 'Most Liked') {
     filteredPosts = filteredPosts.sort((a, b) => b.likes.length - a.likes.length);
   }

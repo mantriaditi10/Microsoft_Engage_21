@@ -15,6 +15,7 @@ const initialFilters = {
 const MainPage = (props) => {
   const dispatch = useDispatch();
   const [filters, setFilters] = useState(initialFilters);
+  const [hashtag, setHashtag] = useState('');
   const page = props.page;
 
   useEffect(() => {
@@ -69,9 +70,9 @@ const MainPage = (props) => {
         </Container>
       </Box>
       <Container maxWidth="lg">
-        <Grid container spacing={2} sx={{ mt: 3 }}>
-          <Posts page={page} filters={filters} />
-          <FilterSideBar filters={filters} setFilters={setFilters} />
+        <Grid container spacing={2} sx={{ mt: 1 }}>
+          <FilterSideBar setHashtag={setHashtag} filters={filters} setFilters={setFilters} />
+          <Posts hashtag={hashtag} page={page} filters={filters} />
         </Grid>
       </Container>
     </React.Fragment>

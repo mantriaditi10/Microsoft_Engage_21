@@ -26,7 +26,6 @@ const Navbar = () => {
       <AppBar position="static">
         <Toolbar>
           <Button sx={{ mr: 2 }} color="inherit" variant="text" size="large" component={Link} to="/blogs">BLOGSPOT</Button>
-          <Button sx={{ mr: 2 }} color="inherit" variant="text" size="large" href="#">COLLABORATIONS</Button>
           <Typography align="right" flexGrow="1" noWrap>
             <Button
               endIcon={<LogoutIcon />}

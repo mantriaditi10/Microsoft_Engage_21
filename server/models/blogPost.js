@@ -20,6 +20,10 @@ const blogPostSchema = mongoose.Schema({
     type: [String],
     default: []
   },
+  comments: {
+    type: [String],
+    default: []
+  }
 });
 
 module.exports = mongoose.model('BlogPosts', blogPostSchema);

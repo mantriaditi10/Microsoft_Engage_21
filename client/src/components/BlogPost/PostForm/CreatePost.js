@@ -10,7 +10,6 @@ const initialState = { title: '', category: '', message: '', tags: [], selectedF
 
 const CreatePost = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
-  //console.log(user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [postData, setPostData] = useState(initialState);
@@ -29,7 +28,7 @@ const CreatePost = () => {
   };
 
   const handleTagChange = (e) => {
-    setTag(e.target.value.split(','));
+    setTag(e.target.value.replace(/\s/g, "").split(','));
   }
 
   const handleChange = (e) => {
@@ -83,10 +82,10 @@ const CreatePost = () => {
             gutterBottom
           >
             WRITE A POST
-                    </Typography>
+          </Typography>
           <Typography fontFamily="fantasy" variant="h5" align="center" color="text.secondary" paragraph>
             Tell your story to the world..!
-                    </Typography>
+          </Typography>
         </Box>
       </Container>
       <Container component="main" maxWidth="md" sx={{ mb: 4 }}>

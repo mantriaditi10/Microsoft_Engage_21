@@ -1,6 +1,7 @@
 import React from 'react'
 import { Grid, Card, Box, CardContent, Typography, Button, CardMedia } from '@mui/material'
 import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
@@ -12,6 +13,7 @@ const Post = (props) => {
   const post = props.post;
   const dispatch = useDispatch();
   const user = props.user;
+  const navigate = useNavigate();
   
   const handleBookmark = () => {
     dispatch(bookmarkBlogPost(post._id, { userId: user.result._id }));
@@ -19,6 +21,10 @@ const Post = (props) => {
 
   const handleLike = () => {
     dispatch(likePost(post._id, { userId: user.result._id }));
+  }
+
+  const readMore = () => {
+    navigate(`/blogs/${post._id}`);
   }
 
   return (
@@ -35,11 +41,11 @@ const Post = (props) => {
             {moment(post.createdAt).fromNow()}
           </Typography>
           <Typography variant="subtitle2" fontStyle="italic" color="text.secondary" component="div">
-            {post.tags.map((tag) => `#${tag}`)}
+            {post.tags.map((tag) => `#${tag}  `)}
           </Typography>
 
           <Box sx={{ display: 'flex', alignItems: 'center', pb: 1, mt: 1 }}>
-            <Button endIcon={<ReadMoreIcon />} variant="outlined"  color="primary">Read</Button>
+            <Button startIcon={<ReadMoreIcon />} variant="outlined" onClick={readMore} color="primary">Read</Button>
             {
               post.bookmarks.includes(user.result._id) || props.page === 'bookmarks' ?
                 <Button startIcon={<BookmarkAddedIcon />} variant="text" disabled color="primary">{post.bookmarks.length}</Button>
