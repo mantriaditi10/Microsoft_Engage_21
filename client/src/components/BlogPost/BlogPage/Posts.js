@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 const Posts = (props) => {
   const filters = props.filters;
-  const posts = useSelector((state) => state.blogPosts.blogPosts[0]);
+  const posts = useSelector((state) => state.blogPosts.blogPosts);
   const user = JSON.parse(localStorage.getItem('profile'));
   const hashtag = props.hashtag;
   

@@ -37,11 +37,10 @@ const CreatePost = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const data = new FormData()
-    data.append("file", image)
-    data.append("upload_preset", "engage-app")
-    data.append("cloud_name", "ms-engage-21")
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "engage-app");
+    data.append("cloud_name", "ms-engage-21");
     fetch("https://api.cloudinary.com/v1_1/ms-engage-21/image/upload", {
       method: "post",
       body: data
@@ -52,11 +51,11 @@ const CreatePost = () => {
         const finalPost = {
           ...postData, selectedFile: data.url, name: user.result.name
         }
-        console.log(finalPost);
+        //console.log(finalPost);
         dispatch(createBlogPost(finalPost, navigate));
       })
       .catch(error => console.log(error));
-  }
+}
 
   return (
     <React.Fragment>
@@ -169,9 +168,6 @@ const CreatePost = () => {
                       setImage(e.target.files[0]);
                     }}
                   />
-                  <label className="custom-file-label" htmlFor="inputGroupFile01">
-                    {imageName}
-                  </label>
                 </div>
               </Grid>
               <Grid item sm={12} md={12}>
