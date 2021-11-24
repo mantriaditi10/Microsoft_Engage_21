@@ -14,7 +14,7 @@ const Post = (props) => {
   const dispatch = useDispatch();
   const user = props.user;
   const navigate = useNavigate();
-  
+
   const handleBookmark = () => {
     dispatch(bookmarkBlogPost(post._id, { userId: user.result._id }));
   }
@@ -43,7 +43,6 @@ const Post = (props) => {
           <Typography variant="subtitle2" fontStyle="italic" color="text.secondary" component="div">
             {post.tags.map((tag) => `#${tag}  `)}
           </Typography>
-
           <Box sx={{ display: 'flex', alignItems: 'center', pb: 1, mt: 1 }}>
             <Button startIcon={<ReadMoreIcon />} variant="outlined" onClick={readMore} color="primary">Read</Button>
             {

@@ -3,7 +3,7 @@ import Navbar from '../../NavBar/Navbar'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom';
 import { fetchBlog } from "../../../actions/blogPosts";
-import { Paper, CircularProgress, Container, Grid, Typography } from '@mui/material';
+import { Paper, CircularProgress, Container, Grid, Typography, Switch, FormGroup, FormControlLabel, Divider } from '@mui/material';
 import moment from 'moment';
 import CommentSection from './CommentSection';
 
@@ -12,6 +12,27 @@ const SingleBlogPost = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [commentAdded, setCommentAdded] = useState(false);
+
+  var myTimeout;
+  function myTimer() {
+      window.speechSynthesis.pause();
+      window.speechSynthesis.resume();
+      myTimeout = setTimeout(myTimer, 10000);
+  }
+  const handleSwitchChange = (e) => {
+    if(e.target.checked) {
+      window.speechSynthesis.cancel();
+        myTimeout = setTimeout(myTimer, 10000);
+        var toSpeak = post.message;
+        var utt = new SpeechSynthesisUtterance(toSpeak);
+        utt.onend =  function() { clearTimeout(myTimeout); }
+        window.speechSynthesis.speak(utt);
+    }
+    else {
+      const synth = window.speechSynthesis;
+      synth.cancel();
+    }
+  }
 
   useEffect(() => {
     console.log('Fetching Again');
@@ -28,7 +49,7 @@ const SingleBlogPost = () => {
             <Grid container spacing={2}>
               <Grid item md={12} xs={12}>
                 <Typography variant="h3" align="center" component="h2" fontFamily="cursive">{post.title}</Typography>
-                <Typography gutterBottom align="center" variant="h6" fontStyle="oblique" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
+                <Typography gutterBottom align="center" variant="h6" fontStyle="oblique" color="textSecondary" component="h2">In {post.category} - {post.tags.map((tag) => `#${tag} `)}</Typography>
               </Grid>
               <Grid item md={2}></Grid>
               <Grid item md={8} xs={12}>
@@ -36,7 +57,19 @@ const SingleBlogPost = () => {
               </Grid>
               <br/>
               <Grid item md={12} xs={12}>
-                <Typography gutterBottom variant="body1" align="justify" component="p">{post.message}</Typography>
+                <Divider />
+                <FormGroup>
+                  <FormControlLabel control={
+                    <Switch
+                      onChange={handleSwitchChange}
+                      inputProps={{ 'aria-label': 'controlled' }}
+                      color="primary"
+                    />}
+                    label={<Typography color="Background" variant="button">Read Aloud</Typography>}
+                  />
+                </FormGroup>
+                <Divider />
+                <Typography sx={{ mt: 1 }} gutterBottom variant="body1" align="justify" component="p">{post.message}</Typography>
                 <Typography variant="h6">Created by: {post.name} </Typography>
                 <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
               </Grid>
