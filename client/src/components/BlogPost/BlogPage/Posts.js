@@ -31,8 +31,8 @@ const Posts = (props) => {
   }
 
   return (
-    !posts ? (<Grid item xs={12} md={8}><CircularProgress />LOADING POSTS.. </Grid>) :
-      (<Grid item xs={12} md={8}>
+    !posts ? (<Grid item xs={12} md={7}><CircularProgress />LOADING POSTS.. </Grid>) :
+      (<Grid item xs={12} md={7}>
         {filteredPosts.map(post => <Post key={post._id} post={post} user={user} page={props.page} />)}
       </Grid>)
   );

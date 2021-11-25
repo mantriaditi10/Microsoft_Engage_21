@@ -29,7 +29,10 @@ const Post = (props) => {
 
   return (
     <Grid item sx={{ m: 3 }}>
-      <Card sx={{ display: "flex", boxShadow: 3 }}>
+      <Typography variant="overline" color="blue" >
+        {post.category === 'Assignment' ? " Assignment for Peer Review" : " Blog Post"}
+      </Typography>
+      <Card sx={{ display: "flex", boxShadow: 5 }}>
         <CardContent sx={{ flex: '1', ml: 2 }}>
           <Typography fontFamily="cursive" component="div" variant="h5">
             {post.title}

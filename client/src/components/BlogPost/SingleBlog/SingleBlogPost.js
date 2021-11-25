@@ -69,7 +69,8 @@ const SingleBlogPost = () => {
                   />
                 </FormGroup>
                 <Divider />
-                <Typography sx={{ mt: 1 }} gutterBottom variant="body1" align="justify" component="p">{post.message}</Typography>
+                {post.category === 'Assignment' ? <pre><Typography align="justify" sx={{ mt: 1 }} gutterBottom variant="body1" component="p">{post.message}</Typography></pre> : <Typography align="justify" sx={{ mt: 1 }} gutterBottom variant="body1" component="p">{post.message}</Typography>}
+                
                 <Typography variant="h6">Created by: {post.name} </Typography>
                 <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
               </Grid>

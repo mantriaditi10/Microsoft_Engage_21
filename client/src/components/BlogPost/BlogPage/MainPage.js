@@ -70,7 +70,7 @@ const MainPage = (props) => {
         </Container>
       </Box>
       <Container maxWidth="lg">
-        <Grid container spacing={2} sx={{ mt: 1 }}>
+        <Grid container spacing={5} sx={{ mt: 1 }}>
           <FilterSideBar setHashtag={setHashtag} filters={filters} setFilters={setFilters} />
           <Posts hashtag={hashtag} page={page} filters={filters} />
         </Grid>

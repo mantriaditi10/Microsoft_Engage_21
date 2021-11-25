@@ -9,6 +9,7 @@ const sidebar = {
   description:
     'Discover more of what matters to you!',
   tags: [
+    { title: 'Assignment', },
     { title: 'Machine Learning', },
     { title: 'Cryptography', },
     { title: 'Artificial Intelligence', },

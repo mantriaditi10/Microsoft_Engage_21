@@ -111,6 +111,7 @@ const CreatePost = () => {
                 <FormControl fullWidth required>
                   <InputLabel>Category</InputLabel>
                   <Select label="Category" name="category" onChange={handleChange} value={postData.category}>
+                    <MenuItem value="Assignment">Assignment</MenuItem>
                     <MenuItem value="Machine Learning">Machine Learning</MenuItem>
                     <MenuItem value="Cryptography">Cryptography</MenuItem>
                     <MenuItem value="Artificial Intelligence">Artificial Intelligence</MenuItem>
