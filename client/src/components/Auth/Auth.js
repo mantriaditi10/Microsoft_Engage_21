@@ -45,16 +45,19 @@ const Auth = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container component="main" sx={{ mb:2, mt:4, height: '90vh' }}>
         <CssBaseline />
+        <Grid item md={1} />
         <Grid
           item
+          component={Paper}
+          elevation={6}
           xs={false}
           sm={4}
-          md={7}
+          md={5}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random)',
-            backgroundRepeat: 'no-repeat',
+            backgroundImage: 'url(https://res.cloudinary.com/ms-engage-21/image/upload/v1637847297/login_vlfvmb.jpg)',
+            // backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
             backgroundSize: 'cover',
@@ -65,13 +68,13 @@ const Auth = () => {
           <Box
             sx={{
               my: 8,
-              mx: 4,
+              mx: 8,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography sx={{ mb: 2 }} component="h1" variant="h5">{isSignup ? 'Sign up' : 'Sign in'}</Typography>
@@ -93,9 +96,6 @@ const Auth = () => {
                     type='password'
                   />
                 </Grid>
-                {isSignup && 
-                  <Input name="confirmPassword" label="Confirm Password" handleChange={handleChange} type="password" />
-                }
               </Grid>
               <Typography sx={{ ml: 1, color: 'error.main', fontStyle: 'italic' }}>{error}</Typography>
               <Button type="submit" fullWidth variant="contained" color="primary" sx={{ ml: 1, mt: 2, mb: 2 }}>

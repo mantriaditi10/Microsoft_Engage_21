@@ -9,7 +9,7 @@ router.get('/', auth, fetchPosts);
 router.get('/:id', auth, fetchPost);
 
 router.post('/', auth, createPost);
-router.post('/:id/comment', commentPost);
+router.post('/:id/comment', auth, commentPost);
 
 router.patch('/:id/bookmark', auth, bookmarkPost);
 router.patch('/:id/like', auth, likePost);
