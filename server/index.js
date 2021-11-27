@@ -2,9 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose')
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
 
-dotenv.config();
+// Should be placed in .env file for security
+// Keeping it here just for easy local access
+const CONNECTION_URL = 'mongodb+srv://dbtest:cnbctv18@engage.hbm0b.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
 // Using Express
 const app = express();
 
@@ -25,7 +27,7 @@ const PORT = 5000;
 
 // Connecting to Database
 mongoose.connect(
-  process.env.CONNECTION_URL,
+  CONNECTION_URL,
   { useNewUrlParser: true },
   { iseUnifiedTopology: true })
   .then(() => app.listen(PORT, () => console.log(`Server listening on port ${PORT}`)))
