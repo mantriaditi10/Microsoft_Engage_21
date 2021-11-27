@@ -5,13 +5,14 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 
 dotenv.config();
+// Using Express
 const app = express();
 
-//import routes
+// Import routes
 const userRoutes = require('./routes/user.js');
 const blogRoutes = require('./routes/blogPosts.js');
 
-//Middleware
+// Middleware
 app.use(express.json({ limit: '30mb', extended: true, }));
 app.use(express.urlencoded({ limit: '30mb', extended: true }));
 app.use(bodyParser.json());
@@ -22,7 +23,7 @@ app.use('/blogs', blogRoutes);
 
 const PORT = 5000;
 
-//Connecting to Database
+// Connecting to Database
 mongoose.connect(
   process.env.CONNECTION_URL,
   { useNewUrlParser: true },

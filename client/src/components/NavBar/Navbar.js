@@ -9,14 +9,13 @@ import { Link } from "react-router-dom";
 
 const theme = createTheme();
 
+// Main Navbar component 
 const Navbar = () => {
-  //const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const logout = () => {
     dispatch({ type: actionType.LOGOUT });
-    //setUser(null);
     navigate('/');
   }
 

@@ -9,6 +9,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import moment from 'moment';
 import { bookmarkBlogPost, likePost } from '../../../actions/blogPosts'
 
+// Individual Post Card
 const Post = (props) => {
   const post = props.post;
   const dispatch = useDispatch();
@@ -29,10 +30,10 @@ const Post = (props) => {
 
   return (
     <Grid item sx={{ m: 3 }}>
-      <Typography variant="overline" color="blue" >
+      <Typography fontSize="" variant="overline" color="blue" >
         {post.category === 'Assignment' ? " Assignment for Peer Review" : " Blog Post"}
       </Typography>
-      <Card sx={{ display: "flex", boxShadow: 5 }}>
+      <Card sx={{ display: "flex", boxShadow: 8 }}>
         <CardContent sx={{ flex: '1', ml: 2 }}>
           <Typography fontFamily="cursive" component="div" variant="h5">
             {post.title}

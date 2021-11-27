@@ -57,7 +57,6 @@ const Auth = () => {
           md={5}
           sx={{
             backgroundImage: 'url(https://res.cloudinary.com/ms-engage-21/image/upload/v1637847297/login_vlfvmb.jpg)',
-            // backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
             backgroundSize: 'cover',
@@ -77,11 +76,19 @@ const Auth = () => {
             <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography sx={{ mb: 2 }} component="h1" variant="h5">{isSignup ? 'Sign up' : 'Sign in'}</Typography>
+            <Typography sx={{ mb: 2 }} fontFamily="fantasy" component="h1" variant="h5">
+              {isSignup ? 'Sign up' : 'Sign in'}
+            </Typography>
             <form onSubmit={handleSubmit}>
               <Grid container spacing={2}>
-                {isSignup && (<Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />)}
-                {isSignup && (<Input name="lastName" label="Last Name" handleChange={handleChange} half />)}
+                {
+                  isSignup && 
+                  (<Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />)
+                }
+                {
+                  isSignup && 
+                  (<Input name="lastName" label="Last Name" handleChange={handleChange} half />)
+                }
                 <Input name="email" label="Email Address" handleChange={handleChange} type="email" />
                 <Grid item xs={12}>
                   <TextField
@@ -97,7 +104,9 @@ const Auth = () => {
                   />
                 </Grid>
               </Grid>
-              <Typography sx={{ ml: 1, color: 'error.main', fontStyle: 'italic' }}>{error}</Typography>
+              <Typography sx={{ ml: 1, color: 'error.main', fontStyle: 'italic' }}>
+                {error}
+              </Typography>
               <Button type="submit" fullWidth variant="contained" color="primary" sx={{ ml: 1, mt: 2, mb: 2 }}>
                 {isSignup ? 'Sign Up' : 'Sign In'}
               </Button>

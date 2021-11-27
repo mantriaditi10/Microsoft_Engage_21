@@ -36,7 +36,7 @@ const FilterSideBar = (props) => {
       <Box
         sx={{
           bgcolor: 'background.paper',
-          boxShadow: 4,
+          boxShadow: 5,
           borderRadius: 1,
           m: 2,
           mt: 3,

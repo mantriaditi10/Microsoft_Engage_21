@@ -1,5 +1,7 @@
 import * as actionType from '../constants/actionTypes';
 
+// Reducer for AUTHENTICATION MODULE
+
 const authReducer = (state = { authData: null }, action) => {
   switch (action.type) {
     case actionType.AUTH:

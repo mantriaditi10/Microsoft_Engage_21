@@ -1,5 +1,7 @@
 import { CREATE_BLOG, FETCH_ALL_BLOGS, BOOKMARK, LIKE, FETCH_BLOG, COMMENT } from "../constants/actionTypes";
 
+// Reducer for BLOG MODULE
+
 const blogReducer = (state = { blogPosts: [] }, action) => {
   switch (action.type) {
     case CREATE_BLOG:

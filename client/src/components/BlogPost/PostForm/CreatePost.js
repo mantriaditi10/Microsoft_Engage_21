@@ -51,7 +51,6 @@ const CreatePost = () => {
         const finalPost = {
           ...postData, selectedFile: data.url, name: user.result.name
         }
-        //console.log(finalPost);
         dispatch(createBlogPost(finalPost, navigate));
       })
       .catch(error => console.log(error));

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Database Schema for a single BLOG POST
 const blogPostSchema = mongoose.Schema({
   title: String,
   message: String,

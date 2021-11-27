@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchBlogPosts } from '../../../actions/blogPosts'
 
+// Component Nesting: MainPage -> (Posts -> Post , FilterSideBar)
+
 const initialFilters = {
   category: 'Show All',
   other: 'Newest First'
@@ -32,7 +34,8 @@ const MainPage = (props) => {
       <Navbar />
       <Box
         sx={{
-          bgcolor: 'background.paper',
+          backgroundImage: 'url(https://res.cloudinary.com/ms-engage-21/image/upload/v1638004606/WhatsApp_Image_2021-11-27_at_2.45.57_PM_yyvsdw.jpg)',
+          backgroundSize: 'cover',
           boxShadow: 1,
           borderRadius: 2,
           m: 1,
@@ -51,7 +54,7 @@ const MainPage = (props) => {
           >
             {page === 'blogs' ? 'BLOGSPOT' : ' BOOKMARKS'}
           </Typography>
-          <Typography fontFamily="fantasy" variant="h5" align="center" color="text.secondary" paragraph>
+          <Typography fontFamily="monospace" variant="h5" align="center" color="text.secondary" paragraph>
             {page === 'blogs' ? 'A place to explore ideas, speak your mind and network with your peers.' 
               : 'Find your bookmarked posts here.'}
           </Typography>
@@ -63,8 +66,8 @@ const MainPage = (props) => {
           >
             <Button component={Link} to="/blogs/createPost" variant="contained">Create your own Post</Button>
             {page === 'blogs' ? 
-                <Button component={Link} to="/blogs/bookmarks" variant="outlined">Bookmarked Posts</Button>
-              : <Button component={Link} to="/blogs" variant="outlined">All Posts</Button>
+                <Button component={Link} to="/blogs/bookmarks" variant="contained">Bookmarked Posts</Button>
+              : <Button component={Link} to="/blogs" variant="contained">All Posts</Button>
             }
           </Stack>
         </Container>

@@ -1,6 +1,8 @@
 import { CREATE_BLOG, FETCH_ALL_BLOGS, BOOKMARK, LIKE, FETCH_BLOG, COMMENT } from "../constants/actionTypes";
 import * as api from '../api/index';
 
+// Every API call for blog related activities and dispatching respective action
+
 export const createBlogPost = (post, navigate) => async (dispatch) => {
   try {
     const { data } = await api.createBlogPost(post);

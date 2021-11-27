@@ -1,8 +1,7 @@
-const express = require('express');
 const mongoose = require('mongoose');
-
 const BlogPost = require('../models/blogPost.js');
 
+// Fetch all Posts
 const fetchPosts = async (req, res) => {
   try {
     const blogs = await BlogPost.find();
@@ -12,6 +11,7 @@ const fetchPosts = async (req, res) => {
   }
 }
 
+// Fetch Single Post Data
 const fetchPost = async (req, res) => {
   try {
     const { id } = req.params;
@@ -26,6 +26,7 @@ const fetchPost = async (req, res) => {
   }
 }
 
+// Add new post data to DB
 const createPost = async (req, res) => {
   const post = req.body;
   const newBlogPost = new BlogPost({
@@ -42,6 +43,7 @@ const createPost = async (req, res) => {
   }
 }
 
+// Bookmark post for current user
 const bookmarkPost = async (req, res) => {
   const { id } = req.params;
   const body = req.body;
@@ -56,6 +58,7 @@ const bookmarkPost = async (req, res) => {
   res.status(200).json(updatedPost);
 }
 
+// Like Post for current User
 const likePost = async (req, res) => {
   const { id } = req.params;
   const body = req.body;
@@ -70,6 +73,7 @@ const likePost = async (req, res) => {
   res.status(200).json(updatedPost);
 }
 
+// Add a comment on a particular post by particular User
 const commentPost = async (req, res) => {
   const { id } = req.params;
   const { comment } = req.body;

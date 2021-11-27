@@ -48,12 +48,26 @@ const SingleBlogPost = () => {
           <Paper elevation={6} sx={{ p: 10, pt:8 , borderRadius: 10, mt: 5 }}>
             <Grid container spacing={2}>
               <Grid item md={12} xs={12}>
-                <Typography variant="h3" align="center" component="h2" fontFamily="cursive">{post.title}</Typography>
-                <Typography gutterBottom align="center" variant="h6" fontStyle="oblique" color="textSecondary" component="h2">In {post.category} - {post.tags.map((tag) => `#${tag} `)}</Typography>
+                <Typography variant="h3" align="center" component="h2" fontFamily="cursive">
+                  {post.title}
+                </Typography>
+                <Typography 
+                  gutterBottom 
+                  align="center" 
+                  variant="h6" 
+                  fontStyle="oblique" 
+                  color="textSecondary" 
+                  component="h2"
+                >
+                  In {post.category} - {post.tags.map((tag) => `#${tag} `)}
+                </Typography>
               </Grid>
               <Grid item md={2}></Grid>
               <Grid item md={8} xs={12}>
-                <img width="100%" src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
+                <img width="100%" 
+                  src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} 
+                  alt={post.title} 
+                />
               </Grid>
               <br/>
               <Grid item md={12} xs={12}>
@@ -69,7 +83,17 @@ const SingleBlogPost = () => {
                   />
                 </FormGroup>
                 <Divider />
-                {post.category === 'Assignment' ? <pre><Typography align="justify" sx={{ mt: 1 }} gutterBottom variant="body1" component="p">{post.message}</Typography></pre> : <Typography align="justify" sx={{ mt: 1 }} gutterBottom variant="body1" component="p">{post.message}</Typography>}
+                {post.category === 'Assignment' ? 
+                  <pre>
+                    <Typography align="justify" sx={{ mt: 1 }} gutterBottom variant="body1" component="p">
+                      {post.message}
+                    </Typography>
+                  </pre> 
+                  :
+                  <Typography sx={{ mt: 1 }} gutterBottom variant="body1" component="p">
+                    {post.message}
+                  </Typography>
+                }
                 
                 <Typography variant="h6">Created by: {post.name} </Typography>
                 <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>

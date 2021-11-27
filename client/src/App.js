@@ -7,7 +7,6 @@ import MainPage from './components/BlogPost/BlogPage/MainPage';
 
 
 const App = () => {
-
   return (
     <BrowserRouter>
       <Routes>

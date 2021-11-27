@@ -9,6 +9,7 @@ const Posts = (props) => {
   const user = JSON.parse(localStorage.getItem('profile'));
   const hashtag = props.hashtag;
   
+  // Filtering and Searching Logic
   var filteredPosts;
   if (posts && hashtag !== '') {
     filteredPosts = posts.filter((post) => post.tags.includes(hashtag));
@@ -31,8 +32,8 @@ const Posts = (props) => {
   }
 
   return (
-    !posts ? (<Grid item xs={12} md={7}><CircularProgress />LOADING POSTS.. </Grid>) :
-      (<Grid item xs={12} md={7}>
+    !posts ? (<Grid item xs={12} md={8}><CircularProgress />LOADING POSTS.. </Grid>) :
+      (<Grid item xs={12} md={8}>
         {filteredPosts.map(post => <Post key={post._id} post={post} user={user} page={props.page} />)}
       </Grid>)
   );

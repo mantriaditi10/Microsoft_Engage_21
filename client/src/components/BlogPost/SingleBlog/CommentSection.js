@@ -20,7 +20,9 @@ const CommentSection = (props) => {
   return (
     <React.Fragment>
       <Divider sx={{ margin: '10px 0' }} />
-      <Typography fontFamily="cursive" gutterBottom variant="h6">COMMENTS / FEEDBACKS</Typography>
+      <Typography fontFamily="cursive" gutterBottom variant="h6">
+        COMMENTS / FEEDBACKS
+      </Typography>
       <Divider sx={{ margin: '10px 0' }} />
       {!post.comments? <CircularProgress /> : (post.comments.map((c, i) => (
         <ListItem key={i} alignItems="flex-start">
@@ -46,10 +48,27 @@ const CommentSection = (props) => {
         </ListItem>
       )))}
       <Divider  sx={{mt: 1}}/>
-      <Typography sx={{ m: 1 }} gutterBottom variant="body1">Leave a comment / feedback: </Typography>
-      <TextField fullWidth rows={2} variant="outlined" label="Comment" multiline value={comment} onChange={(e) => setComment(e.target.value)} />
+      <Typography sx={{ m: 1 }} gutterBottom variant="body1">
+        Leave a comment / feedback: 
+      </Typography>
+      <TextField 
+        fullWidth 
+        rows={2} 
+        variant="outlined"
+        label="Comment" 
+        multiline 
+        value={comment} 
+        onChange={(e) => setComment(e.target.value)} 
+      />
       <br />
-      <Button style={{ marginTop: '10px' }} fullWidth disabled={!comment.length} color="primary" variant="contained" onClick={handleComment}>
+      <Button 
+        style={{ marginTop: '10px' }} 
+        fullWidth 
+        disabled={!comment.length} 
+        color="primary" 
+        variant="contained" 
+        onClick={handleComment}
+      >
         Comment
       </Button>
     </React.Fragment>

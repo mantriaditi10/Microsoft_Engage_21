@@ -1,6 +1,9 @@
 import { AUTH } from '../constants/actionTypes';
 import * as api from '../api/index.js';
 
+// Every API call for authentication related activities and dispatching respective actions
+
+// Hitting signin API in server and dispatching Auth action 
 export const signin = (formData, router, setError) => async (dispatch) => {
   try {
     const { data } = await api.signIn(formData);
@@ -14,6 +17,7 @@ export const signin = (formData, router, setError) => async (dispatch) => {
   }
 };
 
+// Hitting signup API in server and dispatching Auth action
 export const signup = (formData, router, setError) => async (dispatch) => {
   try {
     const { data } = await api.signUp(formData);
